@@ -2,8 +2,8 @@
   "__parent": "./config.json"
 , "person": {
     "name": {
-      "first": "Tomas"
-    , "last": "Baltrushaitis"
+      "first": "Arsénio"
+    , "last": "Costa"
     , "full": "@{./last} @{./first}"
     }
   , "nick": "Tom&acute;AS"
@@ -11,15 +11,15 @@
   , "email": "@{./abbr}@gmail.com"
   , "url":   "http://bit.ly/tomascv"
   , "bio": {
-      "birth": "October &apos;82"
+      "birth": "March &apos;84"
     , "location": {
-        "country": "Ukraine"
-      , "city": "Kyiv"
+        "country": "Portugal"
+      , "city": "Braga"
       , "full": "@{./country}, @{./city}"
       , "lat": 50.436336
       , "lng": 30.488619
       }
-    , "citizenship": "Ukrainian"
+    , "citizenship": "Portuguese"
     }
   , "home": {
       "pos-prefix": "full-stack"
@@ -37,7 +37,7 @@
         "name": "git"
       , "title": "Github account"
       , "icon": "fab fa-github"
-      , "url": "http://bit.ly/tomas-git"
+      , "url": "https://github.com/elincognito"
       }
     , "bb": {
         "name": "bitbucket"
