@@ -1,60 +1,67 @@
 {
-  "__parent": "./config.json"
-, "person": {
+  "__parent": "./config.json",
+  "person": {
     "name": {
-      "first": "Arsénio"
-    , "last": "Costa"
-    , "full": "@{./last} @{./first}"
-    }
-  , "nick": "Tom&acute;AS"
-  , "abbr": "tbaltrushaitis"
-  , "email": "@{./abbr}@gmail.com"
-  , "url":   "http://bit.ly/tomascv"
-  , "bio": {
-      "birth": "March &apos;84"
-    , "location": {
-        "country": "Portugal"
-      , "city": "Braga"
-      , "full": "@{./country}, @{./city}"
-      , "lat": 50.436336
-      , "lng": 30.488619
-      }
-    , "citizenship": "Portuguese"
-    }
-  , "home": {
-      "pos-prefix": "full-stack"
-    , "pos-title": "engineer"
-    , "pos-tags": "#high #skilled #experienced #guru"
-    }
-  , "socials": {
+      "first": "Arsénio",
+      "last": "Costa",
+      "full": "@{./last} @{./first}"
+    },
+    "nick": "Tom&acute;AS",
+    "abbr": "tbaltrushaitis",
+    "email": "@{./abbr}@gmail.com",
+    "url": "http://bit.ly/tomascv",
+    "bio": {
+      "birth": "March &apos;84",
+      "location": {
+        "country": "Portugal",
+        "city": "Braga",
+        "full": "@{./country}, @{./city}",
+        "lat": 50.436336,
+        "lng": 30.488619
+      },
+      "citizenship": "Portuguese"
+    },
+    "home": {
+      "pos-prefix": "full-stack",
+      "pos-title": "developer",
+      "pos-tags": "#high #skilled #experienced"
+    },
+    "socials": {
       "li": {
-        "name": "linkedin"
-      , "title": "Linkedin profile"
-      , "icon": "fab fa-linkedin"
-      , "url": "http://bit.ly/tomas-in"
+        "name": "linkedin",
+        "title": "Linkedin profile",
+        "icon": "fab fa-linkedin",
+        "url": "https://bit.ly/318BOzm"
+      },
+      "git": {
+        "name": "git",
+        "title": "Github account",
+        "icon": "fab fa-github",
+        "url": "https://bit.ly/319Pvy5"
+      },
+      "bb": {
+        "name": "bitbucket",
+        "title": "BitBucket repos",
+        "icon": "fab fa-bitbucket",
+        "url": "http://bit.ly/tomas-bb"
+      },
+      "docker": {
+        "name": "dockerhub",
+        "title": "Docker Hub",
+        "icon": "fab fa-docker",
+        "url": "http://bit.ly/tomas-hub"
       }
-    , "git": {
-        "name": "git"
-      , "title": "Github account"
-      , "icon": "fab fa-github"
-      , "url": "https://github.com/elincognito"
-      }
-    , "bb": {
-        "name": "bitbucket"
-      , "title": "BitBucket repos"
-      , "icon": "fab fa-bitbucket"
-      , "url": "http://bit.ly/tomas-bb"
-      }
-    , "docker": {
-        "name": "dockerhub"
-      , "title": "Docker Hub"
-      , "icon": "fab fa-docker"
-      , "url": "http://bit.ly/tomas-hub"
-      }
-    }
-  , "contacts": {
-      "cell": "KzM4MCg2NykgNzgtemVyby0zMS0xOA=="
-    , "email": "bWFpbHRvOnRiYWx0cnVzaGFpdGlzQGdtYWlsLmNvbQ=="
+    },
+    "stackoverflow": {
+      "name": "stackoverflow",
+      "title": "Stack Overflow",
+      "icon": "fab fa-stack-overflow",
+      "url": "https://bit.ly/2ZjXmZo"
+    },
+    ,
+    "contacts": {
+      "cell": "KzM4MCg2NykgNzgtemVyby0zMS0xOA==",
+      "email": "bWFpbHRvOnRiYWx0cnVzaGFpdGlzQGdtYWlsLmNvbQ=="
     }
   }
 }

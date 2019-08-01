@@ -6,7 +6,21 @@
     , "inclass":  "fadeInDown"
     , "outclass": "fadeOutDown"
     }
-  
+  , {
+      "selector": ".intro-sub"
+    , "inclass":  "zoomInUp"
+    , "outclass": "zoomOutDown"
+    }
+  , {
+      "selector": ".intro h1"
+    , "inclass":  "zoomIn"
+    , "outclass": "zoomOut"
+    }
+  , {
+      "selector": ".intro p"
+    , "inclass":  "rotateIn"
+    , "outclass": "rotateOut"
+    }
   , {
       "selector": "#social-icons ul.list-inline > li"
     , "inclass":  "rollIn"
