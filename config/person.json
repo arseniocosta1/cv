@@ -50,15 +50,14 @@
         "title": "Docker Hub",
         "icon": "fab fa-docker",
         "url": "http://bit.ly/tomas-hub"
+      },
+      "stackoverflow": {
+        "name": "stackoverflow",
+        "title": "Stack Overflow",
+        "icon": "fab fa-stack-overflow",
+        "url": "https://bit.ly/2ZjXmZo"
       }
     },
-    "stackoverflow": {
-      "name": "stackoverflow",
-      "title": "Stack Overflow",
-      "icon": "fab fa-stack-overflow",
-      "url": "https://bit.ly/2ZjXmZo"
-    },
-    ,
     "contacts": {
       "cell": "KzM4MCg2NykgNzgtemVyby0zMS0xOA==",
       "email": "bWFpbHRvOnRiYWx0cnVzaGFpdGlzQGdtYWlsLmNvbQ=="
