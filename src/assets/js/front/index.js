@@ -8,7 +8,7 @@
 
 'use strict';
 
-let fontawesome = require('@fortawesome/fontawesome');
+import fontawesome from '@fortawesome/fontawesome';
 
 window.jQuery(($) => {
 
