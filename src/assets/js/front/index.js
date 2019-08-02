@@ -8,7 +8,7 @@
 
 'use strict';
 
-import fontawesome from '@fortawesome/fontawesome';
+//import fontawesome from '@fortawesome/fontawesome';
 
 window.jQuery(($) => {
 
