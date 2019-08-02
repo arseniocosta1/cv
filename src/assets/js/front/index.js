@@ -8,6 +8,8 @@
 
 'use strict';
 
+import fontawesome from '@fortawesome/fontawesome'
+
 window.jQuery(($) => {
 
   let defOpts = Object.assign({}, {
@@ -190,7 +192,7 @@ window.jQuery(($) => {
       ]
     }
 
-    FontAwesome.library.add(faSplat);
+    fontawesome.library.add(faSplat);
   })();
 
   // ---------------------------------------------------------------------------
