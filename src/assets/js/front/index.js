@@ -8,7 +8,7 @@
 
 'use strict';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
+let  library = require('@fortawesome/fontawesome-svg-core');
 
 window.jQuery(($) => {
 
