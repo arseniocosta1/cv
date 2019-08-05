@@ -6,7 +6,7 @@
       "last": "Costa",
       "full": "@{./last} @{./first}"
     },
-    "nick": "Tom&acute;AS",
+    "nick": "forcewill",
     "abbr": "arsenio.costa",
     "email": "@{./abbr}@gmail.com",
     "url": "http://bit.ly/tomascv",
@@ -59,8 +59,8 @@
       }
     },
     "contacts": {
-      "cell": "KzM4MCg2NykgNzgtemVyby0zMS0xOA==",
-      "email": "bWFpbHRvOnRiYWx0cnVzaGFpdGlzQGdtYWlsLmNvbQ=="
+      "cell": "KzM1MSA5MS10aHJlZS03NiA4My16ZXJvLTQ=",
+      "email": "bWFpbHRvOmFyc2VuaW8uY29zdGFAZ21haWwuY29t"
     }
   }
 }
