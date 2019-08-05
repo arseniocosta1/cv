@@ -7,7 +7,7 @@
       "full": "@{./last} @{./first}"
     },
     "nick": "Tom&acute;AS",
-    "abbr": "tbaltrushaitis",
+    "abbr": "arsenio.costa",
     "email": "@{./abbr}@gmail.com",
     "url": "http://bit.ly/tomascv",
     "bio": {
@@ -16,8 +16,8 @@
         "country": "Portugal",
         "city": "Braga",
         "full": "@{./country}, @{./city}",
-        "lat": 50.436336,
-        "lng": 30.488619
+        "lat": 41.5606373,
+        "lng": -8.3969475
       },
       "citizenship": "Portuguese"
     },
