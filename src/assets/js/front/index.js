@@ -7,7 +7,8 @@
  */
 
 'use strict';
-
+import { fas } from '@fortawesome/fontawesome-free-solid';
+import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 
 window.jQuery(($) => {
 
@@ -204,6 +205,9 @@ window.jQuery(($) => {
 
   $(document).ready(function () {
     console.log('DOCUMENT___READY');
+
+    fontawesome.library.add(fas);
+
   });
 
   $(window).on('load', function () {
