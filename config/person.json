@@ -4,7 +4,7 @@
     "name": {
       "first": "Arsénio",
       "last": "Costa",
-      "full": "@{./last} @{./first}"
+      "full": "@{./first} @{./last}"
     },
     "nick": "forcewill",
     "abbr": "arsenio.costa",
