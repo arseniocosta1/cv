@@ -219,8 +219,9 @@ window.jQuery(($) => {
     };
 
     fontawesome.library.add(faGrapQl);
+    console.log('Added custom icons');
 
-    fontawesome.library.add(fas);
+    // fontawesome.library.add(fas);
 
   });
 
