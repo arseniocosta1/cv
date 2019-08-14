@@ -11,33 +11,28 @@
 //  -----------------------------  DEPENDENCIES  ---------------------------  //
 //  ------------------------------------------------------------------------  //
 
-const fs = require('fs');
+const fs   = require('fs');
 // const del  = require('del');
 const path = require('path');
 const utin = require('util').inspect;
 
-const _ = require('lodash');
-const argv = require('yargs').argv;
+const _          = require('lodash');
+const argv       = require('yargs').argv;
 // const critical   = require('critical');
 const dateFormat = require('dateformat');
 const readConfig = require('read-config');
-const vPaths = require('vinyl-paths');
+const vPaths     = require('vinyl-paths');
 
-const gulp = require('gulp');
-const gulpTasks = require('gulp-require-tasks');
+const gulp         = require('gulp');
+const gulpTasks    = require('gulp-require-tasks');
 const gulpSequence = require('gulp-sequence').use(gulp);
-const changed = require('gulp-changed');
-const gulpif = require('gulp-if');
-const jscs = require('gulp-jscs');
-const jshint = require('gulp-jshint');
-const livereload = require('gulp-livereload');
+const changed      = require('gulp-changed');
+const gulpif       = require('gulp-if');
+const jscs         = require('gulp-jscs');
+const jshint       = require('gulp-jshint');
+const livereload   = require('gulp-livereload');
 
 const pkg = require('./package.json');
-
-const rollup = require('gulp-better-rollup');
-const babel = require('rollup-plugin-babel');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
 
 //  ------------------------------------------------------------------------  //
 //  ----------------------------  CONFIGURATION  ---------------------------  //
@@ -49,8 +44,7 @@ ME.WD = path.join(__dirname);
 
 ME.pkg = Object.assign({}, pkg || {});
 ME.version = ME.pkg.version;
-ME.pkg.built = `${dateFormat(now, 'yyyy-mm-dd')}T${dateFormat(now, 'HH:MM:ss')} ${dateFormat(now,
-  'Z')}`;
+ME.pkg.built = `${dateFormat(now, 'yyyy-mm-dd')}T${dateFormat(now, 'HH:MM:ss')} ${dateFormat(now, 'Z')}`;
 ME.pkg.year = `${dateFormat(now, 'yyyy')}`;
 ME.pkg.options.readconf = Object.assign({}, ME.pkg.options.readconf, {
   basedir: path.join(ME.WD, 'config')
@@ -58,26 +52,24 @@ ME.pkg.options.readconf = Object.assign({}, ME.pkg.options.readconf, {
 utin.defaultOptions = Object.assign({}, ME.pkg.options.iopts);
 
 ME.NODE_ENV = process.env.NODE_ENV
-  ? process.env.NODE_ENV
-  : argv.env
-    ? argv.env
-    : fs.existsSync('./NODE_ENV')
-      ? fs.readFileSync('./NODE_ENV', ME.pkg.options.file).split('\n')[0].trim()
-      : fs.existsSync('config/.NODE_ENV')
-        ? fs.readFileSync('config/.NODE_ENV', ME.pkg.options.file).split('\n')[0].trim()
-        : ME.NODE_ENV || 'test';
+                ? process.env.NODE_ENV
+                : argv.env
+                  ? argv.env
+                  : fs.existsSync('./NODE_ENV')
+                    ? fs.readFileSync('./NODE_ENV', ME.pkg.options.file).split('\n')[0].trim()
+                    : fs.existsSync('config/.NODE_ENV')
+                      ? fs.readFileSync('config/.NODE_ENV', ME.pkg.options.file).split('\n')[0].trim()
+                      : ME.NODE_ENV || 'test';
 
 process.env.NODE_ENV = `${ME.NODE_ENV}`;
 
-ME.VERSION = fs.existsSync('./VERSION') ? fs.readFileSync('./VERSION', ME.pkg.options.file)
-.trim() : ME.version;
-ME.COMMIT = fs.existsSync('./COMMIT') ? fs.readFileSync('./COMMIT', ME.pkg.options.file)
-.trim() : 'COMMIT_UNKNOWN';
+ME.VERSION = fs.existsSync('./VERSION') ? fs.readFileSync('./VERSION', ME.pkg.options.file).trim() : ME.version;
+ME.COMMIT  = fs.existsSync('./COMMIT') ? fs.readFileSync('./COMMIT', ME.pkg.options.file).trim() : 'COMMIT_UNKNOWN';
 
 var BUILD_FILE = path.join(ME.WD, `BUILD-${ME.VERSION}`);
 ME.CNTR = fs.existsSync(`${BUILD_FILE}`)
-  ? fs.readFileSync(`${BUILD_FILE}`, ME.pkg.options.file).trim()
-  : 'tmp';
+            ? fs.readFileSync(`${BUILD_FILE}`, ME.pkg.options.file).trim()
+            : 'tmp';
 
 const modsPath = path.join(ME.WD, 'modules');
 const confBase = path.join(ME.WD, 'config', ME.NODE_ENV + '.json');
@@ -91,36 +83,35 @@ ME.d = function () {
   return `[${C.Gray}${new Date().toISOString()}${C.N}][${C.C}${ME.pkg.name}${C.N}:${C.BC}${ME.VERSION}${C.N}]`;
 };
 
-ME.DIR = {};
+ME.DIR    = {};
 ME.CURDIR = path.join(process.cwd());
-ME.DOC = path.join('docs');
-ME.TMP = path.join('tmp');
-ME.SRC = path.join('src');
-ME.WEB = path.join(`webroot`);
-ME.BUILD = path.join(`build-${ME.VERSION}`);
-ME.DIST = `dist-${ME.VERSION}`;
-ME.BOWER = JSON.parse(fs.existsSync('.bowerrc')
-  ? fs.readFileSync('.bowerrc')
-  : '{"directory": "bower_modules"}'
-).directory;
+ME.DOC    = path.join('docs');
+ME.TMP    = path.join('tmp');
+ME.SRC    = path.join('src');
+ME.WEB    = path.join(`webroot`);
+ME.BUILD  = path.join(`build-${ME.VERSION}`);
+ME.DIST   = `dist-${ME.VERSION}`;
+ME.BOWER  = JSON.parse(fs.existsSync('.bowerrc')
+              ? fs.readFileSync('.bowerrc')
+              : '{"directory": "bower_modules"}'
+            ).directory;
 
 let headTplName = path.join(ME.WD, 'config', 'header.tpl');
 let footTplName = path.join(ME.WD, 'config', 'footer.tpl');
-let headTplCtx = fs.existsSync(headTplName)
-  ? fs.readFileSync(headTplName)
-  : `
+let headTplCtx = fs.existsSync( headTplName )
+                  ? fs.readFileSync( headTplName )
+                  : `
 /*!
  * =========================================================================== *
  * <%= pkg.name %>@<%= pkg.version %>
  * =========================================================================== *
 **/
 `;
-let footTplCtx = fs.existsSync(footTplName)
-  ? fs.readFileSync(footTplName)
-  : `
+let footTplCtx = fs.existsSync( footTplName )
+                  ? fs.readFileSync( footTplName )
+                  : `
 /*!
- * <%= pkg.name %>@<%= pkg.version %> - <%= pkg.title %> [${dateFormat(now,
-    'yyyy-mm-dd')}T${dateFormat(now, 'HH:MM:ss')}Z ${dateFormat(now, 'Z')}]
+ * <%= pkg.name %>@<%= pkg.version %> - <%= pkg.title %> [${dateFormat(now, 'yyyy-mm-dd')}T${dateFormat(now, 'HH:MM:ss')}Z ${dateFormat(now, 'Z')}]
  * =========================================================================== *
 **/
 `;
@@ -129,8 +120,8 @@ let headTpl = _.template(`${headTplCtx}`);
 let footTpl = _.template(`${footTplCtx}`);
 
 const Banner = {
-  header: headTpl({ pkg: ME.pkg, ME: ME })
-  , footer: footTpl({ pkg: ME.pkg, ME: ME })
+    header: headTpl({pkg: ME.pkg, ME: ME})
+  , footer: footTpl({pkg: ME.pkg, ME: ME})
 };
 ME.Banner = Banner;
 
@@ -145,9 +136,9 @@ console.log(`${ME.L}`);
 //  ------------------------------------------------------------------------  //
 
 gulpTasks({
-  path: process.cwd() + '/gulp-tasks'
+    path:      process.cwd() + '/gulp-tasks'
   , separator: ':'
-  , passGulp: true
+  , passGulp:  true
 });
 
 
@@ -155,7 +146,7 @@ gulpTasks({
 //  ----------------------  DEFAULT Scenario Route  ------------------------  //
 //  ------------------------------------------------------------------------  //
 
-function defaultTask(cb) {
+function defaultTask (cb) {
 
   //  ROUTE by ENV
   (function () {
@@ -202,9 +193,9 @@ gulp.task('default', [], (cb) => {
 
 
 gulp.task('lint', [
-  'jscs'
+    'jscs'
   , 'jshint'
-], (cb) => {
+  ], (cb) => {
   console.log(`${ME.d()}[${C.Y}LINT${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
     cb();
@@ -213,10 +204,10 @@ gulp.task('lint', [
 
 
 gulp.task('test', [
-  'show:env'
+    'show:env'
   , 'show:config'
   , 'lint'
-], (cb) => {
+  ], (cb) => {
   console.log(`${ME.d()}[${C.Y}TEST${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
     cb();
@@ -225,9 +216,9 @@ gulp.task('test', [
 
 
 gulp.task('clean', [
-  'clean:build'
+    'clean:build'
   , 'clean:dist'
-], (cb) => {
+  ], (cb) => {
   console.log(`${ME.d()}[${C.Y}CLEAN${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
     cb();
@@ -236,10 +227,10 @@ gulp.task('clean', [
 
 
 gulp.task('build:assets', [
-  'build:css'
+    'build:css'
   , 'build:js'
   , 'build:img'
-], (cb) => {
+  ], (cb) => {
   console.log(`${ME.d()}[${C.Y}BUILD:ASSETS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
     cb();
@@ -248,9 +239,9 @@ gulp.task('build:assets', [
 
 
 gulp.task('build:assets:fast', [
-  'build:css'
+    'build:css'
   , 'build:js'
-], (cb) => {
+  ], (cb) => {
   console.log(`${ME.d()}[${C.Y}BUILD:ASSETS:FAST${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
     cb();
@@ -259,8 +250,8 @@ gulp.task('build:assets:fast', [
 
 
 gulp.task('dev', [
-  'build:dev'
-], (cb) => {
+    'build:dev'
+  ], (cb) => {
   gulp.start('watch');
   console.log(`${ME.d()}[${C.Y}DEV${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
@@ -270,8 +261,8 @@ gulp.task('dev', [
 
 
 gulp.task('prod', [
-  'build'
-], (cb) => {
+    'build'
+  ], (cb) => {
   gulp.start('deploy');
   console.log(`${ME.d()}[${C.Y}PROD${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
@@ -281,8 +272,8 @@ gulp.task('prod', [
 
 
 gulp.task('build:dev', [
-  'bower'
-], (cb) => {
+    'bower'
+  ], (cb) => {
   gulpSequence('sync:src2build', 'build:assets', 'deploy')((err) => {
     if (err) {
       console.log(`${ME.d()}[${C.Y}BUILD:DEV${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
@@ -297,19 +288,18 @@ gulp.task('build:dev', [
 
 
 gulp.task('build', [
-  'scripts',
-  'bower'
-], (cb) => {
+    'bower'
+  ], (cb) => {
   gulpSequence('sync:src2build', 'build:assets', 'deploy')((err) => {
     if (err) {
       console.log(`${ME.d()}[${C.Y}BUILD${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
       return Promise.reject(1);
-    } else {
+    }else{
       console.log(`${ME.d()}[${C.Y}BUILD${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
     }
     if ('function' === typeof cb) {
       return cb();
-    } else {
+    }else{
       return Promise.resolve();
     }
   });
@@ -317,8 +307,8 @@ gulp.task('build', [
 
 
 gulp.task('build:fast', [
-  'sync:src2build'
-], (cb) => {
+    'sync:src2build'
+  ], (cb) => {
   gulpSequence('build:assets:fast', 'deploy')((err) => {
     if (err) {
       console.log(`${ME.d()}[${C.Y}BUILD:FAST${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
@@ -333,8 +323,8 @@ gulp.task('build:fast', [
 
 
 gulp.task('dist', [
-  'clean:dist'
-], (cb) => {
+    'clean:dist'
+  ], (cb) => {
   gulp.start('sync:build2dist');
   console.log(`${ME.d()}[${C.Y}DIST${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
@@ -344,8 +334,8 @@ gulp.task('dist', [
 
 
 gulp.task('deploy', [
-  'sync:build2web'
-], (cb) => {
+    'sync:build2web'
+  ], (cb) => {
   gulp.start('show:env');
   console.log(`${ME.d()}[${C.Y}DEPLOY${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
@@ -387,11 +377,11 @@ gulp.task('watch', [], (cb) => {
 });
 
 gulp.task('watch:src', [
-  'watch:src:default'
+    'watch:src:default'
   , 'watch:src:configs'
   , 'watch:src:css'
   , 'watch:src:js'
-], (cb) => {
+  ], (cb) => {
   console.log(`${ME.d()}[${C.Y}WATCH:SRC${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
   if ('function' === typeof cb) {
     cb();
@@ -400,20 +390,19 @@ gulp.task('watch:src', [
 
 gulp.task('watch:src:default', function () {
   let wSRC = gulp.watch([
-      path.join(ME.SRC, '**/*.html')
+        path.join(ME.SRC, '**/*.html')
       , path.join(ME.SRC, '**/*.txt')
     ]
-    , ME.pkg.options.watch
-    , function () {
-      gulpSequence('populate', 'sync:src2build', 'build:fast', 'deploy')((err) => {
-        if (err) {
-          console.log(`${ME.d()}[${C.Y}WATCH:SRC:DEFAULT${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
-          return Promise.reject(1);
-        }
-        ;
-        console.log(`${ME.d()}[${C.Y}WATCH:SRC:DEFAULT${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
-      });
+  , ME.pkg.options.watch
+  , function () {
+    gulpSequence('populate', 'sync:src2build', 'build:fast', 'deploy')((err) => {
+      if (err) {
+        console.log(`${ME.d()}[${C.Y}WATCH:SRC:DEFAULT${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
+        return Promise.reject(1);
+      };
+      console.log(`${ME.d()}[${C.Y}WATCH:SRC:DEFAULT${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
     });
+  });
   wSRC.on('change', function (e) {
     console.log(`${ME.d()}[${C.W}WATCH:SRC:DEFAULT${C.N}] FILE [${C.P}${e.path}${C.N}] was [${C.OnBlue}${e.type}${C.N}], running tasks ...`);
   });
@@ -423,16 +412,16 @@ gulp.task('watch:src:configs', function () {
   let wCONF = gulp.watch([
       path.join(ME.WD, 'config', '**/*.*')
     ]
-    , ME.pkg.options.watch
-    , function () {
-      gulpSequence('populate', 'build:fast', 'deploy')((err) => {
-        if (err) {
-          console.log(`${ME.d()}[${C.Y}WATCH:SRC:CONFIGS${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
-          return Promise.reject(1);
-        }
-        console.log(`${ME.d()}[${C.Y}WATCH:SRC:CONFIGS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
-      });
+  , ME.pkg.options.watch
+  , function () {
+    gulpSequence('populate', 'build:fast', 'deploy')((err) => {
+      if (err) {
+        console.log(`${ME.d()}[${C.Y}WATCH:SRC:CONFIGS${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
+        return Promise.reject(1);
+      }
+      console.log(`${ME.d()}[${C.Y}WATCH:SRC:CONFIGS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
     });
+  });
   wCONF.on('change', function (e) {
     console.log(`${ME.d()}[${C.W}WATCH:SRC${C.N}] CONFIG [${C.P}${e.path}${C.N}] was [${C.W}${e.type}${C.N}], running tasks ...`);
   });
@@ -442,16 +431,16 @@ gulp.task('watch:src:css', function () {
   let wCSS = gulp.watch([
       path.join(ME.SRC, 'assets/css', '**/*.css')
     ]
-    , ME.pkg.options.watch
-    , function () {
-      gulpSequence('sync:src2build', 'build:css', 'deploy')((err) => {
-        if (err) {
-          console.log(`${ME.d()}[${C.Y}WATCH:SRC:CSS${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
-          return Promise.reject(1);
-        }
-        console.log(`${ME.d()}[${C.Y}WATCH:SRC:CSS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
-      });
+  , ME.pkg.options.watch
+  , function () {
+    gulpSequence('sync:src2build', 'build:css', 'deploy')((err) => {
+      if (err) {
+        console.log(`${ME.d()}[${C.Y}WATCH:SRC:CSS${C.N}] ${C.BR}ERROR${C.N}: [${utin(err)}]`);
+        return Promise.reject(1);
+      }
+      console.log(`${ME.d()}[${C.Y}WATCH:SRC:CSS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
     });
+  });
   wCSS.on('change', function (e) {
     console.log(`${ME.d()}[${C.W}WATCH:SRC${C.N}] CSS [${C.P}${e.path}${C.N}] was [${C.W}${e.type}${C.N}], running tasks ...`);
   });
@@ -461,16 +450,16 @@ gulp.task('watch:src:js', function () {
   let wScripts = gulp.watch([
       path.join(ME.SRC, 'assets/js', '**/*.js')
     ]
-    , ME.pkg.options.watch
-    , function () {
-      gulpSequence('lint', 'populate', 'sync:src2build', 'build:js', 'deploy')((err) => {
-        if (err) {
-          console.log(`${ME.d()}[${C.Y}WATCH:SRC:JS${C.N}] ${C.BRed}ERROR${C.N}: [${utin(err)}]`);
-          return Promise.reject(1);
-        }
-        console.log(`${ME.d()}[${C.Y}WATCH:SRC:JS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
-      });
+  , ME.pkg.options.watch
+  , function () {
+    gulpSequence('lint', 'populate', 'sync:src2build', 'build:js', 'deploy')((err) => {
+      if (err) {
+        console.log(`${ME.d()}[${C.Y}WATCH:SRC:JS${C.N}] ${C.BRed}ERROR${C.N}: [${utin(err)}]`);
+        return Promise.reject(1);
+      }
+      console.log(`${ME.d()}[${C.Y}WATCH:SRC:JS${C.N}] ${C.BW}${C.OnBlue}FINISHED${C.N}`);
     });
+  });
   wScripts.on('change', function (e) {
     console.log(`${ME.d()}[${C.W}WATCH:SRC${C.N}] JS [${C.P}${e.path}${C.N}] was [${C.W}${e.type}${C.N}], running tasks ...`);
   });
@@ -483,37 +472,37 @@ gulp.task('watch:src:js', function () {
 
 gulp.task('jscs', function () {
   return gulp.src([
-    path.join(ME.SRC, 'assets/js/front', '**/*.js')
-    , path.join(ME.SRC, 'assets/js/app', '**/*.js')
-  ])
-  .pipe(jscs({ configPath: 'config/.jscsrc' }))
-  .pipe(jscs.reporter());
+        path.join(ME.SRC, 'assets/js/front', '**/*.js')
+      , path.join(ME.SRC, 'assets/js/app', '**/*.js')
+    ])
+    .pipe(jscs({configPath: 'config/.jscsrc'}))
+    .pipe(jscs.reporter());
 });
 
 
 gulp.task('jshint', function () {
-  let jshintConfig = JSON.parse(fs.existsSync('./config/.jshintrc')
-    ? fs.readFileSync('./config/.jshintrc')
-    : {}
-  );
+  let jshintConfig =  JSON.parse(fs.existsSync('./config/.jshintrc')
+                        ? fs.readFileSync('./config/.jshintrc')
+                        : {}
+                      );
   jshintConfig.lookup = false;
   return gulp.src([
-    path.join(ME.SRC, 'assets/js/front', '**/*.js')
-    , path.join(ME.SRC, 'assets/js/app', '**/*.js')
-  ])
-  .pipe(jshint(jshintConfig))
-  .pipe(gulpif('production' === ME.NODE_ENV
-    , jshint.reporter('jshint-stylish', { verbose: true })
-    , jshint.reporter('default', { verbose: true })
-  ));
-  //  , jshint.reporter('fail',         {verbose: true})
+        path.join(ME.SRC, 'assets/js/front', '**/*.js')
+      , path.join(ME.SRC, 'assets/js/app', '**/*.js')
+    ])
+    .pipe(jshint(jshintConfig))
+    .pipe(gulpif('production' === ME.NODE_ENV
+      , jshint.reporter('jshint-stylish', {verbose: true})
+      , jshint.reporter('default',        {verbose: true})
+    ));
+    //  , jshint.reporter('fail',         {verbose: true})
 });
 
 
 //  Log file paths in the stream
 gulp.task('show:src', function () {
   return gulp.src([
-    path.join(ME.SRC, '**/*')
+      path.join(ME.SRC, '**/*')
     , path.join(ME.SRC, '**/*.*')
     , path.join(ME.SRC, '**/.*')
   ])
@@ -551,12 +540,6 @@ gulp.task('show:env', function (cb) {
   }
 });
 
-
-gulp.task('scripts', () => {
-  return gulp.src('src/assets/js/front/*.js')
-  .pipe(rollup({ plugins: [babel(), resolve(), commonjs()] }, 'umd'))
-  .pipe(gulp.dest('dist/'));
-});
 
 /**
  * EXPOSE

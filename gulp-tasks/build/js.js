@@ -21,6 +21,11 @@ const terser     = require('gulp-terser');
 const vPaths     = require('vinyl-paths');
 const readConfig = require('read-config');
 
+const rollup = require('gulp-better-rollup');
+const babel = require('rollup-plugin-babel');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+
 //  ------------------------------------------------------------------------  //
 //  ----------------------------  CONFIGURATION  ---------------------------  //
 //  ------------------------------------------------------------------------  //
@@ -55,6 +60,7 @@ const buildJs = function (gulp) {
       console.log(`${ME.d()}[${C.W}FRONT${C.N}] ${C.Y}JS${C.N}: [${p}]`);
       return Promise.resolve(p);
     }))
+    .pipe(rollup({ plugins: [babel(), resolve(), commonjs()] }, 'umd'))
     .pipe(gulpif('production' === ME.NODE_ENV, terser(ME.pkg.options.terser)))
     //  Write banners
     .pipe(headfoot.header(ME.Banner.header))
