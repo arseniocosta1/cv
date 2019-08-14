@@ -73,6 +73,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
     "bower": "^1.8.8",
     "dateformat": "^3.0.3",
     "del": "^3.0.0",

@@ -7,8 +7,8 @@
  */
 
 'use strict';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 
-import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 
 window.jQuery(($) => {
 
@@ -212,7 +212,7 @@ window.jQuery(($) => {
     ]
   };
 
-  fontawesome.library.add(faGrapQl);
+  library.add(faGrapQl);
 
   var faSplat = {
     prefix: 'fac',
@@ -225,9 +225,11 @@ window.jQuery(($) => {
     ]
   };
 
-  fontawesome.library.add(faSplat);
+  library.add(faSplat);
 
   console.log('Added custom icons');
+
+  dom.watch();
 
   // fontawesome.library.add(fas);
 
