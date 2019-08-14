@@ -75,10 +75,12 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.20"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
     "bower": "^1.8.8",
     "dateformat": "^3.0.3",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-better-rollup": "^4.0.1",
     "gulp-changed": "^3.2.0",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat-css": "^3.1.0",
@@ -104,6 +106,10 @@
     "main-bower-files": "^2.13.1",
     "merge-stream": "^1.0.1",
     "read-config": "^2.0.0",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "vinyl-paths": "^2.1.0",
     "yargs": "^13.2.0"
   },
