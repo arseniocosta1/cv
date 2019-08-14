@@ -7,7 +7,7 @@
  */
 
 'use strict';
-import { fas } from '@fortawesome/fontawesome-free-solid';
+
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 
 window.jQuery(($) => {
