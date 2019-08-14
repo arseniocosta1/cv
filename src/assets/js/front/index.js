@@ -8,7 +8,16 @@
 
 'use strict';
 
-import * as fontawesome from '@fortawesome/fontawesome-svg-core';
+require.config({
+  paths: {
+    'FontAwesome': '@fortawesome/fontawesome-svg-core'
+  },
+  shim: {
+    'FontAwesome': {
+      exports: 'FontAwesome'
+    }
+  }
+});
 
 window.jQuery(($) => {
 
