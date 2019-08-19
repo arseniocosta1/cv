@@ -242,7 +242,7 @@ window.jQuery(($) => {
   };
 
   library.add(cSharp);
-  
+
   console.log('Added custom icons');
 
   dom.watch();
