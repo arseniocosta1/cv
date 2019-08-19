@@ -256,7 +256,7 @@ window.jQuery(($) => {
   };
 
   library.add(dotNet);
-  
+
   console.log('Added custom icons');
 
   dom.watch();
