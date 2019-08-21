@@ -59,7 +59,7 @@ window.jQuery(($) => {
   (function () {
 
     let w = window;
-    let dataRoot = w.location.origin + 'assets/data/';
+    let dataRoot = w.location.origin + '/assets/data/';
 
     // Examine the text in the response
     function status(r) {
