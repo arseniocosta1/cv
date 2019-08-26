@@ -9,7 +9,7 @@
     "nick": "forcewill",
     "abbr": "arsenio.costa",
     "email": "@{./abbr}@gmail.com",
-    "url": "http://bit.ly/tomascv",
+    "url": "http://bit.ly/arseniocv",
     "bio": {
       "birth": "March &apos;84",
       "location": {
@@ -38,18 +38,6 @@
         "title": "Github account",
         "icon": "fab fa-github",
         "url": "https://bit.ly/319Pvy5"
-      },
-      "bb": {
-        "name": "bitbucket",
-        "title": "BitBucket repos",
-        "icon": "fab fa-bitbucket",
-        "url": "http://bit.ly/tomas-bb"
-      },
-      "docker": {
-        "name": "dockerhub",
-        "title": "Docker Hub",
-        "icon": "fab fa-docker",
-        "url": "http://bit.ly/tomas-hub"
       },
       "stackoverflow": {
         "name": "stackoverflow",
