@@ -1,14 +1,14 @@
 {
   "author": {
     "name": {
-      "first": "Tomas"
-    , "last": "Baltrushaitis"
+      "first": "Arsenio"
+    , "last": "Costa"
     , "full": "@{./last} @{./first}"
     }
-  , "nick": "Tom&acute;AS"
-  , "abbr": "tbaltrushaitis"
+  , "nick": "forcewill"
+  , "abbr": "arsenio.costa"
   , "email": "@{./abbr}@gmail.com"
-  , "url":   "https://github.com/@{./abbr}"
+  , "url":   "https://github.com/elincognito"
   }
 , "project": {
     "license": "MIT"
