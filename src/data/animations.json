@@ -1,6 +1,5 @@
 {
   "animations": [
-    {},
     {
       "selector": "#about .section-title",
       "inclass": "fadeInDown",
